@@ -1,20 +1,21 @@
 # BASIC Production Ready Django Application
 
-This repo allows anyone to clone this repo, then set up their django application to deploy to heroku FAST
+This repo allows anyone to clone this repo, then set up their Django application to deploy to heroku FAST. I wanted to make something
+where I just had to change 1 file, then set `DEBUG=False` and I was good to go.
 
 ---
 
 ## Background
 
 Recently I have built an amazing software SaaS product with Django and it worked perfectly in development. Once I switched
-`DEBUG=FALSE` all hell broke lose and everything started breaking. Pushing to heroku was such a pain. I couldn't get Amazon S3
+`DEBUG=False` all hell broke lose and everything started breaking. Pushing to heroku was such a pain. I couldn't get Amazon S3
 to work and spent 2 full days trying to integrate it.
 
 ## Features
 
 - BASIC. The reason for this repo is essentially to have a project that can be deployed within minutes
 - Uses Amazon S3 to fulfill static and media files. Setup is EASY.
-- In your Amazon Bucket, your static files and media files are seperated into their respective folders.
+- In your Amazon Bucket, your static files and media files are seperated into their respective folders which makes a CLEAN bucket.
 - Already uses a .env file through [django-environ](https://github.com/joke2k/django-environ) inspired by [12factor](https://12factor.net/)
 
 
@@ -51,8 +52,6 @@ Make sure you complete everything inside `First Steps` first. Then run:
 
     $ pip install -r requirements.txt
     $ python manage.py collectstatic
-    $ python manage.py makemigrations
-    $ python manage.py migrate
 
 Alternatively, you can go to the `/easy_deploy` folder and run on Windows:
 
