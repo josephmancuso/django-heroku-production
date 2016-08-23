@@ -14,6 +14,7 @@ to work and spent 2 full days trying to integrate it.
 
 - BASIC. The reason for this repo is essentially to have a project that can be deployed within minutes
 - Uses Amazon S3 to fulfill static and media files. Setup is EASY.
+- In your Amazon Bucket, your static files and media files are seperated into their respective folders.
 - Already uses a .env file through [django-environ](https://github.com/joke2k/django-environ) inspired by [12factor](https://12factor.net/)
 
 
@@ -32,8 +33,17 @@ You'll need to create an Amazon S3 Bucket and User. Follow the instructions in t
 
 ### Set up your `.env` variables
 Make sure you set up your `djangon-environ` variables inside the `.env` inside the main root of your project
-(Same place as where your manage.py file is). Copy and paste the content from `.env-template`
-and replace it with your information. You can then safely delete `.env-template`. Don't commit your actual `.env` to source-control!
+(Same place as where your manage.py file is). Don't commit your actual `.env` to source-control!
+
+```python
+    # This is WRONG
+    AWS_STORAGE_BUCKET_NAME="Bucket-Name"
+```
+```python
+    # This is CORRECT
+    AWS_STORAGE_BUCKET_NAME=Bucket-Name
+```
+
 
 ## Deployed Locally
 
@@ -44,14 +54,19 @@ Make sure you complete everything inside `First Steps` first. Then run:
     $ python manage.py makemigrations
     $ python manage.py migrate
 
+Alternatively, you can go to the `/easy_deploy` folder and run on Windows:
+
+    $ .\local.bat
+
 Then run the server.
 
 ## Deployment to Heroku
 
-Deploying to Heroku is incredibly easy. Once you finished everything in First Steps above, just navigate to the `helloworld/easy_deploy` folder and run
+Deploying to Heroku is incredibly easy. Once you finished everything in First Steps above, just navigate to the `/easy_deploy` folder and run on Windows
 
     $ .\deploy.bat
 
 Enter your Heroku login credentials and let the program run. Your all set!
+
 Your ready to launch!
 
