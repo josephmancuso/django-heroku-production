@@ -1,0 +1,14 @@
+{% extends 'anotherapp/base.html' %}
+
+{% block content %}
+<form action="" method="POST" role="form">
+    <div class='center well col-xs-offset-3' style="width: 50%">
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.username.label }}{{ form.username }}<br />
+            {{ form.password.label }}{{ form.password }}<br />
+            <input type="submit" value="Login" class="flat-design ui-background-green" style="display: inline-block" />
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,119 @@
+<div class="row content-section">
+        <h2 class="center dark-blue">Active Orders</h2><hr />
+        {% if current_orders %}
+            {% for info in current_orders %}
+                <!-- Progress Bar -->
+
+                <div class="progress progress-striped active" style="font-weight: bold;">
+                   {% if info.status == 1 %}
+                       <div class="progress-bar progress-bar-primary " role="progressbar" aria-valuenow="33"
+                       aria-valuemin="0" aria-valuemax="100" style="width: 33%;">Preparing</div>
+
+                   {% elif info.status == 2 %}
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="66"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 66%;">Cooking</div>
+                   {% else %}
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 100%;">Done!</div>
+                    {% endif %}
+                </div>
+
+                <div class="row center">
+                    <div class="col-xs-12 col-sm-4">
+                        <span class="flat-design ui-background-blue progress-update" style="width: 100%" order="{{ info.id }}">Preparing</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <span class="flat-design ui-background-red progress-update" style="width: 100%" order="{{ info.id }}">Cooking</span>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <span class="flat-design ui-background-green progress-update" style="width: 100%" order="{{ info.id }}">Done</span>
+                    </div>
+
+                </div>
+
+
+
+                  <div class="status" style="display: none;">{{ info.status }}</div>
+
+
+                {% if info.delivery == 1 %}
+                    <div class="delivery" style="display: none">yes</div>
+                {% endif %}
+
+                <!-- Total amount paid -->
+                <h3 class="center dark-blue">Total: ${{ info.total }}</h3>
+                <div class="dark-blue center">Confirmation Number: <span class="confirm_number">{{ info.confirmation }}</span><br>
+                Order Type:
+                    {% if item.delivery == 1 %}
+                        Delivery
+                    {% else %}
+                        Pickup
+                    {% endif %}<br />
+                </div>
+                <div class="center">
+                    <small>If you have to make any changes to this order, please call Alberts Pizza at 631-487-0798</small>
+                </div>
+
+                <h3 class="center dark-blue">Order Information</h3>
+
+                <!-- Order Information -->
+
+                <div class="order-information center dark-blue">
+                    {% for a in info.order_cart.cartitem_set.all %}
+                        {{ a.quantity }} - {{ a.size }} - {{ a }}<br />
+                    {% endfor %}
+                </div>
+                <hr />
+            {% endfor %}
+        {% else %}
+            <h3 class="center dark-blue">No Current Orders</h3>
+        {% endif %}
+</div>
+
+<script type="text/javascript">
+    $(".progress-update").click(function(){
+        var value = $(this).text();
+        var progression_bar = $(this).closest(".row").prev(".progress").find(".progress-bar");
+        order = $(this).attr('order');
+
+        if (value == "Preparing"){
+            progression_bar.
+            removeClass("progress-bar-primary progress-bar-danger progress-bar-success").
+            addClass("progress-bar-primary");
+
+            progression_bar.text("Preparing!");
+
+            $(this).closest(".row").prev(".progress").find(".progress-bar").css("width", "33%");
+
+        }else if (value == "Cooking"){
+            progression_bar.
+            removeClass("progress-bar-primary progress-bar-danger progress-bar-success").
+            addClass("progress-bar-danger");
+
+            progression_bar.text("Cooking!");
+
+            $(this).closest(".row").prev(".progress").find(".progress-bar").css("width", "66%");
+
+        }else if (value == "Done"){
+            progression_bar.
+            removeClass("progress-bar-primary progress-bar-danger progress-bar-success").
+            addClass("progress-bar-success");
+
+            progression_bar.text("Done!");
+
+            $(this).closest(".row").prev(".progress").find(".progress-bar").css("width", "100%");
+        }
+
+
+        $.ajax({
+            type: "GET",
+            url: "/crm/order/owner/engine/",
+            data: { method: "update-status", status: value, id: order},
+            success: function() {
+                //alert("success");
+            }
+        });
+
+    });
+
+</script>

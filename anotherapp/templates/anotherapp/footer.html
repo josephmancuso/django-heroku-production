@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<footer>
+    <div class="container-fluid">
+        <div class="col-xs-12 col-sm-4">
+
+            <!-- Website Address -->
+            {{ settings.site_title }}
+        </div>
+        <div class="col-xs-12 col-sm-4">
+
+            <!-- Social Links -->
+            <img src="{% static 'images/social/facebook.png' %}" />
+            <img src="{% static 'images/social/twitter.png' %}" />
+
+        </div>
+
+    </div>
+</footer>
+
+{% comment %}
+    Puttings a few essential scripts inside the future.
+    This will allow me to add something like a cart into the base.html
+    and be able to put a widget (like the cart) on every page.
+{% endcomment %}
+
+<!-- JS for the Slick JS Plugin -->
+<script type="text/javascript" src="{% static 'slick/slick.min.js' %}"></script>
+
+{# Custom JavaScript file #}
+<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
