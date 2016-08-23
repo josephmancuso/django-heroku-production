@@ -16,13 +16,6 @@ import environ
 env = environ.Env(DEBUG=(bool, False),)  # Set default values and casting
 environ.Env.read_env(".env")
 
-# ENSURE THAT THIS IS CHANGED FROM TEST KEYS TO PRODUCTION KEYS DURING DEPLOYMENT
-# Please put the stripe secret keys here:
-# This API key goes on the server side. This will be found in the views.py file as: settings.STRIPE_API_KEY
-STRIPE_API_KEY = env('STRIPE_API_KEY')
-# This DATA key goes on the client side and can be found in checkout.html inside the form.
-STRIPE_DATA_KEY = env('STRIPE_DATA_KEY')
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
