@@ -34,7 +34,7 @@ You'll need to create an Amazon S3 Bucket and User. Follow the instructions in t
 
 ### Set up your `.env` variables
 Make sure you set up your `django-environ` variables inside the `.env` inside the root of your project
-(Same place as where your settings.py file is). Don't commit your actual `.env` to source-control!
+(Same place as where your manage.py file is). Don't commit your actual `.env` to source-control!
 
 ```python
     # This is WRONG
