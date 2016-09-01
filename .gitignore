@@ -1,4 +1,8 @@
 __pycache__
 venv
 *.pyc
+project/*.pyc
+project/__pycache__
+app/*.pyc
+app/__pycache__
 .idea
