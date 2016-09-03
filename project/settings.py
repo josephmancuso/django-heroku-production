@@ -73,10 +73,17 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+# Production PostgreSQL from Amazon RDS.
+# Go to your amazon dashboard > Amazon RDS > and create a new PostgreSQL instance.
+# Add that information to your .env file.
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('AWS_RDS_DATABASE_NAME'),
+        'USER': env('AWS_RDS_USERNAME'),
+        'PASSWORD': env('AWS_RDS_PASSWORD'),
+        'HOST': env('AWS_RDS_ENDPOINT'),
+        'PORT': env('AWS_RDS_PORT'),
     }
 }
 
